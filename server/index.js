@@ -51,10 +51,10 @@ io.on('connection', (socket) => {
     roomStates.set(roomId, imageData);
   });
 
-  // Clear canvas in a room
+  // Clear canvas in a room (io.to includes the sender)
   socket.on('clearCanvas', (roomId) => {
     roomStates.delete(roomId);
-    socket.to(roomId).emit('clearCanvas');
+    io.to(roomId).emit('clearCanvas');
   });
 
   socket.on('disconnect', () => {
